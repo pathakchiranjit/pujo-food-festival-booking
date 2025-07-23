@@ -49,7 +49,7 @@
         <button type="submit" class="bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded font-semibold">
           ✅ Book Now
         </button>
-      </form>
+      </form id="bookingForm" class="space-y-4">
     </section>
 
     <!-- Contact Info -->
@@ -63,4 +63,36 @@
     © 2025 Manjuri Garden Apartments Owners Association | Food Committee
   </footer>
 </body>
+  <script>
+  const scriptURL = "https://script.google.com/macros/s/AKfycbyfvr0sTQNE14TPViUp7thZo7Gsi7v9B829Ly6VGqonQmuhrEhT1GVEqCh7wNmDbpR8NQ/exec";
+  const form = document.getElementById("bookingForm");
+
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const data = {
+      name: form.name.value,
+      flat: form.flat.value,
+      phone: form.phone.value,
+      attendees: form.attendees.value
+    };
+
+    fetch(scriptURL, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(res => res.json())
+    .then(response => {
+      alert("🎉 Booking successful!");
+      form.reset();
+    })
+    .catch(err => {
+      alert("⚠️ Something went wrong.");
+      console.error(err);
+    });
+  });
+</script>
 </html>
