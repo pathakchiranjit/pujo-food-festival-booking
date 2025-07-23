@@ -103,7 +103,9 @@
       })
       .then(res => res.text())
       .then(response => {
-        alert("✅ Booking successful! Redirecting to WhatsApp...");
+        console.log("Response from server:", response);
+        if (response.includes("Success")) {
+          alert("✅ Booking successful! Redirecting to WhatsApp...");
 
           // WhatsApp message
           const msg = `Hi! I would like to book for the Pujo Food Festival 2025.%0A%0AName: ${name}%0AFlat No: ${flat}%0APhone: ${phone}%0AAttendees: ${attendees}`;
