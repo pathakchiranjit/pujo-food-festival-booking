@@ -86,17 +86,19 @@
       return;
     }
 
-    const data = { name, flat, phone, attendees };
+    <!--const data = { name, flat, phone, attendees };-->
+    const data = new FormData();
+    data.append("name", name);
+    data.append("flat", flat);
+    data.append("phone", phone);
+    data.append("attendees", attendees);
 
     // Google Sheets URL
     const scriptURL = "https://script.google.com/macros/s/AKfycbzfTkyn14BWZkQ6pl3RhsxkHUhyELgNl-J0OUa6ZglpnS05rxcqoi29nz5EUePtAf-RTg/exec";
 
     fetch(scriptURL, {
       method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
+      body: data,
     })
       .then(response => {
         if (response.ok) {
